@@ -1,5 +1,4 @@
 import java.util.HashSet;
-import java.util.Set;
 
 // CS108 HW1 -- String static methods
 
@@ -12,7 +11,21 @@ public class StringCode {
 	 * @return max run length
 	 */
 	public static int maxRun(String str) {
-		return 0; // YOUR CODE HERE
+		int maxx = 0;
+		int cnt = 0;
+		if (str.isEmpty()) return 0;
+		char cur = str.charAt(0);
+		for (int i = 0; i < str.length(); i++) {
+			if (str.charAt(i) == cur) {
+				cnt++;
+			} else {
+				cur = str.charAt(i);
+				maxx = Integer.max(maxx, cnt);
+				cnt = 1;
+			}
+		}
+		maxx = Integer.max(maxx, cnt);
+		return maxx;
 	}
 
 	
@@ -24,7 +37,19 @@ public class StringCode {
 	 * @return blown up string
 	 */
 	public static String blowup(String str) {
-		return null; // YOUR CODE HERE
+		String ans = "";
+		for (int i = 0; i < str.length(); i++) {
+			if ((str.charAt(i) >= '0') && (str.charAt(i) <= '9') && i < str.length() - 1) {
+				int cnt = (int) (str.charAt(i) - '0');
+				while (cnt != 0) {
+					ans += str.charAt(i + 1);
+					cnt--;
+				}
+			} else if ((str.charAt(i) < '0') || (str.charAt(i) > '9')) {
+				ans += str.charAt(i);
+			}
+		}
+		return ans;
 	}
 	
 	/**
@@ -34,6 +59,15 @@ public class StringCode {
 	 * Compute this in linear time using a HashSet. Len will be 1 or more.
 	 */
 	public static boolean stringIntersect(String a, String b, int len) {
-		return false; // YOUR CODE HERE
+		HashSet<String> save = new HashSet<String>();
+		for (int i = 0; i <= a.length() - len; i++) {
+			save.add(a.substring(i, i + len));
+		}
+		for (int i = 0; i < b.length() - len; i++) {
+			if (save.contains(b.substring(i, i + len))) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

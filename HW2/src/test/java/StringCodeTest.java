@@ -82,7 +82,14 @@ public class StringCodeTest {
 		assertEquals(2, StringCode.maxRun("112233"));
 		assertEquals(3, StringCode.maxRun("1112233"));
 	}
-
+	public void teststringIntersect() {
+		// "evolve" technique -- make a series of test cases
+		// where each is change from the one above.
+		assertEquals(true, StringCode.stringIntersect("123","123",2));
+		assertEquals(true, StringCode.stringIntersect("1223","123",1));
+		assertEquals(false, StringCode.stringIntersect("112233","456",1));
+		assertEquals(false, StringCode.stringIntersect("1112233","456",3));
+	}
 	// Need test cases for stringIntersect
 	
 }
